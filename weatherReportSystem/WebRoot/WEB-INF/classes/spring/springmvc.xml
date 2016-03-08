@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/tx
+    	   http://www.springframework.org/schema/tx/spring-tx.xsd
+    	   http://www.springframework.org/schema/mvc
+    	   http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    	   
+    	 
+	<!-- 自动扫描controller -->
+	<context:component-scan base-package="cn.wrs.controller"/>	
+	
+	<!-- 静态资源的解析，包括：js、css、img。。。 -->
+	<mvc:resources location="/js/" mapping="/js/**"/>
+	<mvc:resources location="/img/" mapping="/img/**"/>
+	
+	<!-- 注解映射器 -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/> -->
+	<!-- 注解适配器 -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/> -->
+	<mvc:annotation-driven/>
+	<!-- 配置视图解析器 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
+		<!--配置jsp路径的前缀  -->
+		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<!--配置jsp路径的后缀  -->
+		<property name="suffix" value=".jsp"/>
+	</bean>
+
+	<!--multipart类型解析器  -->
+<!-- 	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		设置文件的最大尺寸为5M
+		<property name="maxUploadSize" value="10485760"/>
+	</bean> -->
+	
+	<!-- 自定义参数绑定 -->
+	<!-- <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		转换器
+		<property name="converters">
+			<list>
+				日期类型转换器
+				<bean class="cn.itcast.sm.controller.converter.CustomDateConverter"/>
+			</list>
+		</property>
+	</bean> -->
+	
+</beans>

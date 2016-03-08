@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="cn.wrs.mapper.WeatherMapperCustom">
+
+	<resultMap id="weatherList" type="cn.wrs.po.WeatherCustom">
+		<id column="city_id" property="id"/>
+		<result column="cityName" property="name"/>
+		<collection property="weathers" ofType="cn.wrs.po.Weather">
+			<id column="id" property="id"/>
+			<result column="temperature" property="temperature"/>
+			<result column="weathercond" property="weathercond"/>
+			<result column="tips" property="tips"/>
+			<result column="ctime" property="ctime"/>
+		</collection>
+	</resultMap>
+	
+	<select id="selectWeatherByCity" parameterType="String" resultMap="weatherList">
+		select city.name cityName,city.id city_id,weather.* from city,weather where city.name = #{name} and city.id = weather.cityId
+	</select>
+</mapper>
